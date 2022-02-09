@@ -11,15 +11,15 @@
 		this.marks.length = 10;
 		this.visitingSchedule.length = 10;
 
-		this.age = function () {
+		Student.prototype.age = function () {
 			return new Date().getFullYear() - this.birthYear
 		}
 
-		this.averageMark = function () {
+		Student.prototype.averageMark = function () {
 			return this.marks.reduce((acc, item) => (acc += item)) / this.marks.length
 		}
 
-		this.present = function () {
+		Student.prototype.present = function () {
 			for (let i = 0; i < this.visitingSchedule.length; i++) {
 				if (this.visitingSchedule[i] === false || this.visitingSchedule[i]) continue;
 				this.visitingSchedule[i] = true;
@@ -27,7 +27,7 @@
 			}
 		};
 
-		this.absent = function () {
+		Student.prototype.absent = function () {
 			for (let i = 0; i < this.visitingSchedule.length; i++) {
 				if (this.visitingSchedule[i] === false || this.visitingSchedule[i]) continue;
 				this.visitingSchedule[i] = false;
@@ -35,7 +35,7 @@
 			}
 		};
 
-		this.mark = function (mark) {
+		Student.prototype.mark = function (mark) {
 			if (mark < 1 || mark > 10) throw new Error("Incorrect Mark")
 			for (let i = 0; i < this.marks.length; i++) {
 				if (this.marks[i]) continue;
@@ -44,7 +44,7 @@
 			}
 		};
 
-		this.summary = function () {
+		Student.prototype.summary = function () {
 			if ((this.marks.reduce((acc, item) => (acc += item)) / this.marks.length) > 9
 				&&
 				(this.visitingSchedule.reduce((acc, item) => (acc += item)) / this.visitingSchedule.length) > 0.9) {
@@ -55,6 +55,9 @@
 		};
 	};
 
+	Student.prototype.this = function () {
+		console.log(this);
+	}
 
 
 	let kolya = new Student("Nykola", "Tesla", 1856)
@@ -101,5 +104,11 @@
 
 	console.log("===========AVERAGE MARK===========");
 	console.log(kolya.averageMark());
+
+	console.log("===========обьект kolya===========");
+	console.log(kolya);
+
+	console.log("===========THIS===========");
+	kolya.this()
 })()
 
